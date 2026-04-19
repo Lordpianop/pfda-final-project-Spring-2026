@@ -1,6 +1,8 @@
 import pygame
 
 def main():
+    pygame.init()
+    pygame.display.set_caption("Car Maze Craze")
     tileSize = 40
     gridWidth = 15
     gridHeight = 15
@@ -17,6 +19,12 @@ def main():
                 running = False
         
         screen.fill((0, 0, 0))
+         
+        gridColor = pygame.Color(50, 50, 50)
+
+        for row in range():
+            for col in range():
+
         pygame.display.flip()
 
         clock.tick(60)
