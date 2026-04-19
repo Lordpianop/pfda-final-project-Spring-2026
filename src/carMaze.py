@@ -22,8 +22,14 @@ def main():
          
         gridColor = pygame.Color(50, 50, 50)
 
-        for row in range():
-            for col in range():
+        for row in range(gridHeight):
+            for col in range(gridWidth):
+                x = col * tileSize
+                y = row * tileSize
+
+                square = pygame.Rect(x, y, tileSize, tileSize)
+                pygame.draw.rect(screen, gridColor, square, 1)
+
 
         pygame.display.flip()
 
