@@ -4,6 +4,14 @@ import pygame
 class Player():
     def __init__(self, grid_position=(0, 0), size=40):
         self.grid_position = grid_position
+        self.size = size
+        self.color = pygame.Color(0, 200, 0)
+        self.surface = self.update_surface()
+    
+    def update_surface(self):
+        surface = pygame.Surface((self.size, self.size))
+        surface.fill(self.color)
+        return surface
 
 def main():
     pygame.init()
