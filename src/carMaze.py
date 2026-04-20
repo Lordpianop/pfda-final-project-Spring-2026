@@ -1,5 +1,10 @@
 import pygame
 
+
+class Player():
+    def __init__(self, grid_position=(0, 0), size=40):
+        self.grid_position = grid_position
+
 def main():
     pygame.init()
     pygame.display.set_caption("Car Maze Craze")
