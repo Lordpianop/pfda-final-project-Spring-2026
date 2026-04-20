@@ -12,6 +12,11 @@ class Player():
         surface = pygame.Surface((self.size, self.size))
         surface.fill(self.color)
         return surface
+    
+    def draw(self, screen):
+        col, row = self.grid_position
+        x = col * self.size
+        y = row * self.size
 
 def main():
     pygame.init()
