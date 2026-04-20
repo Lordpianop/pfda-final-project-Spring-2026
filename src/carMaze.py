@@ -17,6 +17,7 @@ class Player():
         col, row = self.grid_position
         x = col * self.size
         y = row * self.size
+        screen.blit(self.surface, (x, y))
 
 def main():
     pygame.init()
@@ -29,6 +30,7 @@ def main():
     screen = pygame.display.set_mode(resolution)
 
     clock = pygame.time.Clock()
+    player = Player(grid_position=(7, 7), size=tileSize)
     running = True
 
     while running:
@@ -47,6 +49,7 @@ def main():
 
                 square = pygame.Rect(x, y, tileSize, tileSize)
                 pygame.draw.rect(screen, gridColor, square, 1)
+        player.draw(screen)
 
 
         pygame.display.flip()
