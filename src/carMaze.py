@@ -37,6 +37,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            
+            if event.type == pygame.KEYDOWN:
+                col, row = player.grid_position
+
+                if event.key == pygame.w:
+                    row -= 1
         
         screen.fill((0, 0, 0))
          
