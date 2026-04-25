@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class Player():
@@ -32,6 +33,13 @@ def main():
     clock = pygame.time.Clock()
     player = Player(grid_position=(7, 7), size=tileSize)
     running = True
+
+    maze = []
+    for row in range(gridHeight):
+        maze_row = []
+        for col in range(gridWidth):
+            maze_row.append(0)
+        maze.append(maze_row)
 
     while running:
         for event in pygame.event.get():
