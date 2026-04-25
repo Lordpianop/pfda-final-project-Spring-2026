@@ -50,7 +50,7 @@ def main():
                 elif event.key == pygame.K_d:
                     col += 1
 
-                player.grid_position (col, row)
+                player.grid_position = (col, row)
         
         screen.fill((0, 0, 0))
          
