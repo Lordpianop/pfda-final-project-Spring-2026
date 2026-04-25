@@ -41,8 +41,16 @@ def main():
             if event.type == pygame.KEYDOWN:
                 col, row = player.grid_position
 
-                if event.key == pygame.w:
+                if event.key == pygame.K_w:
                     row -= 1
+                elif event.key == pygame.K_s:
+                    row += 1
+                elif event.key == pygame.K_a:
+                    col -= 1
+                elif event.key == pygame.K_d:
+                    col += 1
+
+                player.grid_position (col, row)
         
         screen.fill((0, 0, 0))
          
