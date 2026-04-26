@@ -37,6 +37,13 @@ class Checkpoint():
         screen.blit(self.surface, (x, y))
     
     
+def get_random_floor_position(maze):
+    while True:
+        row = random.randrange(len(maze))
+        col = random.randrange(len(maze[0]))
+
+        if maze[row][col] == 0:
+            return (col, row)
 
 def main():
     pygame.init()
