@@ -121,6 +121,17 @@ def main():
         checkpoint.draw(screen)
         player.draw(screen)
 
+        bar_width = 200
+        bar_height = 20
+        bar_x = 10
+        bar_y = 10
+
+        pygame.draw.rect(screen, (100, 100, 100), (bar_x, bar_y, 
+                                                   bar_width, bar_height))
+        
+        gas_width = int((gas / max_gas) * bar_width)
+        pygame.draw.rect(screen, (0, 200, 0), (bar_x, bar_y, gas_width, bar_height))
+
 
         pygame.display.flip()
 
