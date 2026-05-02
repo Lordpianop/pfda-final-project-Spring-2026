@@ -69,7 +69,14 @@ def main():
     checkpoint_pos = get_random_floor_position(maze)
     checkpoint = Checkpoint(grid_position=checkpoint_pos, size=tileSize)
 
+    dt = 0
+
+    gas = 100
+    max_gas = 100
+    drain_rate = 0.02
+
     while running:
+        gas -= drain_rate * dt
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -113,7 +120,7 @@ def main():
 
         pygame.display.flip()
 
-        clock.tick(60)
+        dt = clock.tick(60)
     
     pygame.quit()
 
