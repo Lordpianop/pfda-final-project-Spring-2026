@@ -54,6 +54,11 @@ def load_high_score():
                 return int(row[0])
     except:
         return 0
+    
+def save_high_score(score):
+    with open("high_score.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow([score])
 
 def main():
     pygame.init()
@@ -88,10 +93,17 @@ def main():
     score = 0
     font = pygame.font.SysFont(None, 36)
 
+    high_score = load_high_score()
+
     while running:
         gas -= drain_rate * dt
         if gas <= 0:
             print("Game Over")
+
+            if score > high_score:
+                save_high_score(score)
+                print("New High Score!")
+                
             running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
