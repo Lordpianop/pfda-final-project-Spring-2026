@@ -75,6 +75,9 @@ def main():
     max_gas = 100
     drain_rate = 0.02
 
+    score = 0
+    font = pygame.font.SysFont(None, 36)
+
     while running:
         gas -= drain_rate * dt
         if gas <= 0:
@@ -104,7 +107,8 @@ def main():
                     checkpoint_pos = get_random_floor_position(maze)
                     checkpoint.grid_position = checkpoint_pos
                     gas = max_gas
-                    print("Checkpoint Reached")
+                    score += 1
+                    print("Score:", score)
 
         
         screen.fill((0, 0, 0))
