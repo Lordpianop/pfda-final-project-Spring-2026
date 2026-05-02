@@ -136,6 +136,9 @@ def main():
         gas_width = int((gas / max_gas) * bar_width)
         pygame.draw.rect(screen, (0, 200, 0), (bar_x, bar_y, gas_width, bar_height))
 
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (10, 40))
+
 
         pygame.display.flip()
 
