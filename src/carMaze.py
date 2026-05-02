@@ -77,6 +77,9 @@ def main():
 
     while running:
         gas -= drain_rate * dt
+        if gas <= 0:
+            print("Game Over")
+            running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -100,6 +103,7 @@ def main():
                 if player.grid_position == checkpoint.grid_position:
                     checkpoint_pos = get_random_floor_position(maze)
                     checkpoint.grid_position = checkpoint_pos
+                    gas = max_gas
                     print("Checkpoint Reached")
 
         
