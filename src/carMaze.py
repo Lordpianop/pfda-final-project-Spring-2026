@@ -24,7 +24,7 @@ class Checkpoint():
     def __init__(self, grid_position=(0, 0), size=40):
         self.grid_position = grid_position
         self.size = size
-        self.color = pygame.Color(0, 200, 0)
+        self.color = pygame.Color(255, 200, 0)
         self.surface = self.update_surface()
     def update_surface(self):
         surface = pygame.Surface((self.size, self.size))
@@ -66,6 +66,9 @@ def main():
             maze_row.append(0)
         maze.append(maze_row)
 
+    checkpoint_pos = get_random_floor_position(maze)
+    checkpoint = Checkpoint(grid_position=checkpoint_pos, size=tileSize)
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,9 +86,15 @@ def main():
                     new_col -= 1
                 elif event.key == pygame.K_d:
                     new_col += 1
-
+                
                 if 0 <= new_col < gridWidth and 0 <= new_row < gridHeight:
                     player.grid_position = (new_col, new_row)
+                
+                if player.grid_position == checkpoint.grid_position:
+                    checkpoint_pos = get_random_floor_position(maze)
+                    checkpoint.grid_position = checkpoint_pos
+                    print("Checkpoint Reached")
+
         
         screen.fill((0, 0, 0))
          
@@ -98,6 +107,7 @@ def main():
 
                 square = pygame.Rect(x, y, tileSize, tileSize)
                 pygame.draw.rect(screen, gridColor, square, 1)
+        checkpoint.draw(screen)
         player.draw(screen)
 
 
