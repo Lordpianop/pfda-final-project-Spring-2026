@@ -1,3 +1,4 @@
+import csv
 import pygame
 import random
 
@@ -44,6 +45,15 @@ def get_random_floor_position(maze):
 
         if maze[row][col] == 0:
             return (col, row)
+
+def load_high_score():
+    try:
+        with open("high_score.csv", "r") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                return int(row[0])
+    except:
+        return 0
 
 def main():
     pygame.init()
