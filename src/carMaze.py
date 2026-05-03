@@ -95,6 +95,9 @@ def main():
 
     high_score = load_high_score()
 
+    move_timer = 0
+    move_delay = 120
+
     while running:
         gas -= drain_rate * dt
         if gas <= 0:
@@ -105,7 +108,14 @@ def main():
                 print("New High Score!")
 
             running = False
+
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    running = False
+
+        move_timer += dt
+        if move_timer >= move_delay:
+
             keys = pygame.key.get_pressed()
 
             col, row = player.grid_position
@@ -120,18 +130,20 @@ def main():
             elif keys[pygame.K_d]:
                 new_col += 1
 
-            if 0 <= new_col < gridWidth and 0 <= new_row < gridHeight:
-                player.grid_position = (new_col, new_row)
+            if (new_col, new_row) != (col, row):
+                if 0 <= new_col < gridWidth and 0 <= new_row < gridHeight:
+                    player.grid_position = (new_col, new_row)
 
-            if event.type == pygame.QUIT:
-                running = False
+                    move_timer = 0
                 
-                if player.grid_position == checkpoint.grid_position:
-                    checkpoint_pos = get_random_floor_position(maze)
-                    checkpoint.grid_position = checkpoint_pos
-                    gas = max_gas
-                    score += 1
-                    print("Score:", score)
+                    if player.grid_position == checkpoint.grid_position:
+                        checkpoint_pos = get_random_floor_position(maze)
+                        checkpoint.grid_position = checkpoint_pos
+                        gas = max_gas
+                        score += 1
+                        print("Score:", score)
+
+        
 
                     
 
