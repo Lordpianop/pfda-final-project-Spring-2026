@@ -103,7 +103,7 @@ def main():
             if score > high_score:
                 save_high_score(score)
                 print("New High Score!")
-                
+
             running = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -131,6 +131,7 @@ def main():
                     gas = max_gas
                     score += 1
                     print("Score:", score)
+                    
 
         
         screen.fill((0, 0, 0))
@@ -160,6 +161,9 @@ def main():
 
         score_text = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_text, (10, 40))
+
+        high_score_text = font.render(f"High Score: {high_score}", True, (200, 200, 200))
+        screen.blit(high_score_text, (430, 10))
 
 
         pygame.display.flip()
