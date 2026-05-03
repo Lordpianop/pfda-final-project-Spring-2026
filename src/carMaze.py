@@ -106,24 +106,25 @@ def main():
 
             running = False
         for event in pygame.event.get():
+            keys = pygame.key.get_pressed()
+
+            col, row = player.grid_position
+            new_col, new_row = col, row
+
+            if keys[pygame.K_w]:
+                new_row -= 1
+            elif keys[pygame.K_s]:
+                new_row += 1
+            elif keys[pygame.K_a]:
+                new_col -= 1
+            elif keys[pygame.K_d]:
+                new_col += 1
+
+            if 0 <= new_col < gridWidth and 0 <= new_row < gridHeight:
+                player.grid_position = (new_col, new_row)
+
             if event.type == pygame.QUIT:
                 running = False
-            
-            if event.type == pygame.KEYDOWN:
-                col, row = player.grid_position
-                new_col, new_row = col, row
-
-                if event.key == pygame.K_w:
-                    new_row -= 1
-                elif event.key == pygame.K_s:
-                    new_row += 1
-                elif event.key == pygame.K_a:
-                    new_col -= 1
-                elif event.key == pygame.K_d:
-                    new_col += 1
-                
-                if 0 <= new_col < gridWidth and 0 <= new_row < gridHeight:
-                    player.grid_position = (new_col, new_row)
                 
                 if player.grid_position == checkpoint.grid_position:
                     checkpoint_pos = get_random_floor_position(maze)
@@ -131,6 +132,7 @@ def main():
                     gas = max_gas
                     score += 1
                     print("Score:", score)
+
                     
 
         
