@@ -98,12 +98,16 @@ def main():
     move_timer = 0
     move_delay = 120
 
+    game_over = False
+
     while running:
         gas -= drain_rate * dt
-        if gas <= 0:
+        if gas <= 0 and not game_over:
+            game_over = True
             print("Game Over")
 
             if score > high_score:
+                high_score = score
                 save_high_score(score)
                 print("New High Score!")
 
