@@ -74,12 +74,24 @@ def main():
     player = Player(grid_position=(7, 7), size=tileSize)
     running = True
 
-    maze = []
-    for row in range(gridHeight):
-        maze_row = []
-        for col in range(gridWidth):
-            maze_row.append(0)
-        maze.append(maze_row)
+    maze = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,1,1,1,1,1,1,0,1],
+    [1,0,1,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,0,0,1,0,0,0,0,0,1,0,0,0,1],
+    [1,1,1,0,1,0,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,1,0,1,0,0,0,1,0,1],
+    [1,0,1,1,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+    [1,0,1,1,1,1,1,1,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,1,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,0,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+]
+
 
     checkpoint_pos = get_random_floor_position(maze)
     checkpoint = Checkpoint(grid_position=checkpoint_pos, size=tileSize)
@@ -168,7 +180,11 @@ def main():
                 y = row * tileSize
 
                 square = pygame.Rect(x, y, tileSize, tileSize)
-                pygame.draw.rect(screen, gridColor, square, 1)
+
+                if maze[row][col] == 1:
+                    pygame.draw.rect(screen, (80, 80, 80), square)
+                else:
+                    pygame.draw.rect(screen, gridColor, square, 1)
         checkpoint.draw(screen)
         player.draw(screen)
 
