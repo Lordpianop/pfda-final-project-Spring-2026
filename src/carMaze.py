@@ -189,6 +189,22 @@ def main():
         high_score_text = font.render(f"High Score: {high_score}", True, (200, 200, 200))
         screen.blit(high_score_text, (430, 10))
 
+        if game_over:
+            gameOver_fontsize = pygame.font.SysFont(None, 72)
+            restart_fontsize = pygame.font.SysFont(None, 40)
+
+            gameOver_text = gameOver_fontsize.render("GAME OVER", True, (255, 50, 50))
+            restart_text = restart_fontsize.render("Press R to Restart", True, (255, 255, 255))
+            quit_text = restart_fontsize.render("Press Q to Quit", True, (200, 200, 200))
+
+            gameOver_position = gameOver_text.get_rect(center=(resolution[0] // 2, 220))
+            restart_position = restart_text.get_rect(center=(resolution[0] // 2, 300))
+            quit_position = quit_text.get_rect(center=(resolution[0] // 2, 340))
+
+            screen.blit(gameOver_text, gameOver_position)
+            screen.blit(restart_text, restart_position)
+            screen.blit(quit_text, quit_position)
+
 
         pygame.display.flip()
 
