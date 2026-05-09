@@ -111,11 +111,15 @@ def main():
                 save_high_score(score)
                 print("New High Score!")
 
-            running = False
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    running = False
+                running = False
+            if event.type == pygame.KEYDOWN and game_over:
+                    if event.key == pygame.K_r:
+                        main()
+                        return
+                    elif event.key == pygame.K_q:
+                        running = False
         
         if not game_over:
 
