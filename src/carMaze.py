@@ -60,6 +60,62 @@ def save_high_score(score):
         writer = csv.writer(file)
         writer.writerow([score])
 
+def draw_maze(screen, maze, tileSize, gridColor):
+    for row in range(len(maze)):
+        for col in range(len(maze[row])):
+
+            x = col * tileSize
+            y = row * tileSize
+
+            square = pygame.Rect(x, y, tileSize, tileSize)
+
+            if maze[row][col] == 1:
+                pygame.draw.rect(screen, (0, 90, 155), square)
+            else:
+                pygame.draw.rect(screen, gridColor, square, 1)
+
+def draw_ui(screen, gas, max_gas, score, high_score, font):
+
+    bar_width = 200
+    bar_height = 20
+    bar_x = 10
+    bar_y = 10
+
+    pygame.draw.rect(screen, (100, 100, 100), (bar_x, bar_y, bar_width, bar_height))
+
+    gas_width = int((gas / max_gas) * bar_width)
+
+    pygame.draw.rect(screen, (0, 200, 0), (bar_x, bar_y, gas_width, bar_height))
+
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+
+    screen.blit(score_text, (10, 40))
+
+    high_score_text = font.render(f"High Score: {high_score}", True, (200, 200, 200))
+
+    screen.blit(high_score_text, (430, 10))
+
+def draw_game_over(screen, resolution):
+
+    gameOver_fontsize = pygame.font.SysFont(None, 72)
+    restart_fontsize = pygame.font.SysFont(None, 40)
+
+    gameOver_text = gameOver_fontsize.render("GAME OVER", True, (255, 50, 50))
+
+    restart_text = restart_fontsize.render("Press R to Restart", True, (255, 255, 255))
+
+    quit_text = restart_fontsize.render("Press Q to Quit", True, (200, 200, 200))
+
+    gameOver_position = gameOver_text.get_rect(center=(resolution[0] // 2, 220))
+
+    restart_position = restart_text.get_rect(center=(resolution[0] // 2, 300))
+
+    quit_position = quit_text.get_rect(center=(resolution[0] // 2, 340))
+
+    screen.blit(gameOver_text, gameOver_position)
+    screen.blit(restart_text, restart_position)
+    screen.blit(quit_text, quit_position)
+
 def main():
     pygame.init()
     pygame.display.set_caption("Car Maze Craze")
@@ -165,62 +221,20 @@ def main():
                             gas = max_gas
                             score += 1
                             print("Score:", score)
-
-        
-
-                    
-
         
         screen.fill((20, 20, 20))
          
         gridColor = pygame.Color(40, 40, 40)
 
-        for row in range(gridHeight):
-            for col in range(gridWidth):
-                x = col * tileSize
-                y = row * tileSize
+        draw_maze(screen, maze, tileSize, gridColor)
 
-                square = pygame.Rect(x, y, tileSize, tileSize)
-
-                if maze[row][col] == 1:
-                    pygame.draw.rect(screen, (0, 90, 155), square)
-                else:
-                    pygame.draw.rect(screen, gridColor, square, 1)
         checkpoint.draw(screen)
         player.draw(screen)
 
-        bar_width = 200
-        bar_height = 20
-        bar_x = 10
-        bar_y = 10
-
-        pygame.draw.rect(screen, (100, 100, 100), (bar_x, bar_y, 
-                                                   bar_width, bar_height))
-        
-        gas_width = int((gas / max_gas) * bar_width)
-        pygame.draw.rect(screen, (0, 200, 0), (bar_x, bar_y, gas_width, bar_height))
-
-        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
-        screen.blit(score_text, (10, 40))
-
-        high_score_text = font.render(f"High Score: {high_score}", True, (200, 200, 200))
-        screen.blit(high_score_text, (430, 10))
+        draw_ui(screen, gas, max_gas, score, high_score, font)
 
         if game_over:
-            gameOver_fontsize = pygame.font.SysFont(None, 72)
-            restart_fontsize = pygame.font.SysFont(None, 40)
-
-            gameOver_text = gameOver_fontsize.render("GAME OVER", True, (255, 50, 50))
-            restart_text = restart_fontsize.render("Press R to Restart", True, (255, 255, 255))
-            quit_text = restart_fontsize.render("Press Q to Quit", True, (200, 200, 200))
-
-            gameOver_position = gameOver_text.get_rect(center=(resolution[0] // 2, 220))
-            restart_position = restart_text.get_rect(center=(resolution[0] // 2, 300))
-            quit_position = quit_text.get_rect(center=(resolution[0] // 2, 340))
-
-            screen.blit(gameOver_text, gameOver_position)
-            screen.blit(restart_text, restart_position)
-            screen.blit(quit_text, quit_position)
+            draw_game_over(screen, resolution)
 
 
         pygame.display.flip()
