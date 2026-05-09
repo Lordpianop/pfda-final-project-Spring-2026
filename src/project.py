@@ -156,7 +156,7 @@ def main():
 
     gas = 100
     max_gas = 100
-    drain_rate = 0.02
+    drain_rate = 0.01
 
     score = 0
     font = pygame.font.SysFont(None, 36)
@@ -221,6 +221,8 @@ def main():
                             gas = max_gas
                             score += 1
                             print("Score:", score)
+                            drain_rate += .0005
+                            move_delay -= .05
         
         screen.fill((20, 20, 20))
          
