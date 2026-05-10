@@ -2,7 +2,7 @@
 Project Speed Maze Craze
 
 ## Demo
-Demo Video: <URL>
+Demo Video: <https://youtu.be/wjpVZM6yJYc>
 
 ## GitHub Repository
 GitHub Repo: <https://github.com/Lordpianop/pfda-final-project-Spring-2026/tree/main>
